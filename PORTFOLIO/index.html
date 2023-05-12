@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" contenteditable="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+    <title>BonsaiBee</title>
+    <!-- ,,,,,,,,,,,, CSS LINK ,,,,,,,,,,,-->
+    <link rel="stylesheet" href="CSS/main.css" />
+    <link rel="text/javascript" href="script.js" />
+</head>
+
+<body>
+    <!-- ,,,,,,,,, NAV BAR start,,,,,,,,, -->
+    <nav>
+        <div class="container nav-container">
+            <div class="bonsBee-logo">
+                <img src="CSS/img/BonsaiBeeLogo.ico" class="icon2">
+            </div>
+            <h2 class="logo">
+                BONSAI<span>BEE</span>
+            </h2>
+
+            <div class="search-bar">
+                <img src="CSS/icon/search.svg" class="icon2">
+                <input type="search" placeholder="search for user...">
+            </div>
+            <div class="login">
+                <label for="creatPost" class="btn btn-primary">LOGIN</label>
+                <div class="profile-phots">
+                    <img src="CSS/img/User2.png" alt="">
+                </div>
+            </div>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+            <div class="quad-state-toggle">
+
+                <button onclick="DarkMode()" class="quad-state-toggle-button" id="toggle-button1">
+                    Dark
+                </button>
+
+                <button onclick="tangyMode()" class="quad-state-toggle-button" id="toggle-button2">
+                    Tangy
+                </button>
+
+                <button onclick="lightMode()" class="quad-state-toggle-button" id="toggle-button3">
+                    Light
+                </button>
+            </div>
+        </div>
+        <!-- ,,,,,,,,, Dark/Light toggle start,,,,,,,,, -->
+
+    </nav>
+    <!-- ,,,,,,,,, NAV BAR end,,,,,,,,, -->
+
+    <!-- ................START MAIN SECTION......................... -->
+    <main>
+        <div class="container main-container">
+            <!--=======MAIN LEFT======== -->
+            <div class="main-left">
+                <div class="profile">
+                    <div class="profile-phots">
+                        <img src="CSS/img/User2.png" alt="">
+                    </div>
+                    <div class="hendel">
+                        <h4>User</h4>
+                        <p class="text-gry">@user</p>
+                    </div>
+                </div>
+
+                <!--.............. SIDEBAR.............. -->
+                <div class="side-bar">
+
+                    <a class="menu-item active">
+                       <h3>HOME</h3>
+                    </a>
+                    <a class="menu-item ">
+                        <h3>GAMES</h3>
+                    </a>
+                    <a class="menu-item" id="notifice">
+                        <span> <small class="count">0</small></span><h3>NOTIFICATIONS</h3>
+                        <!-- ....................NOTIFICATION............................ -->
+                       
+                    </a>
+                    <a class="menu-item" id="MESSAGE">
+                        <h3>MESSAGE</h3>
+                    </a>
+                    <a class="menu-item ">
+                       <h3>SAVED</h3>
+                    </a>
+                    <a class="menu-item g">
+                        <h3>SETTINGS</h3>
+                    </a>
+
+                    <label for="creatPost" class="btn btn-primary">login post</label>
+
+                </div>
+
+            </div>
+            <!-- =======MAIN MID======= -->
+            <div class="main-mid">
+                <form class="creatPost">
+                    <div class="profile-phots">
+                        <img src="CSS/img/User2.png" alt="">
+                    </div>
+                    <div class="text-post">
+                        <input type="text" placeholder="Post your thoughts here..." class="creatPost">
+                    </div>
+                    <div>
+                        <input type="submit" value="post" class="btn btn-primary">
+                    </div>
+                </form>
+
+                <!--.................. START feed .......................-->
+                <section id="feed"></section>
+                <section id="like-count"></section>
+                <section id="like-button"></section>
+                <!--.................. END feed .........................-->
+            </div>
+            <!-- ...... MAIN right ...... -->
+            <div class="main-right">
+                <div class="MESSAGEs" id="MESSAGE-box">
+                    <div class="MESSAGE-heading">
+                        <h4>MESSAGE</h4><span><img src="CSS/icon/pencil-square.svg" class="icon1"></span>
+                    </div>
+
+                    <!-- ...... START friend request ......-->
+                    <section id="friends"></section>
+                </div>
+            </div>
+    </main>
+    <!-- ................END MAIN SECTION......................... -->
+    <script src="animation.js"></script>
+    <script src="friends.js"></script>
+    <script src="posts.js"></script>
+    <footer>
+        <h6> Please be advised that the Single Paged Web application is provided for demonstration purposes only and does not store any user data in a server database. The application merely showcases hows a social media feed algorithm could function, and is not intended to be used as a production system. By using this application, you agree that it is provided 'as is' and without any warranties, express or implied, including but not limited to the implied warranties of merchantability and fitness for a particular purpose. You further agree that the application's creators shall not be liable for any direct, incidental, special or consequential damages arising from or in connection with the use or inability to use this application.</h6>
+    </footer>
+</body>
+</html>
