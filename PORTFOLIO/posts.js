@@ -11,7 +11,7 @@ const jsonData = [
         "location": "Cornwall,",
         "timeId": 10,
         "feedPhoto": "CSS/img/feed1.jpeg",
-        "likes": "78",
+        "likes": 78,
         "caption": "Monster waves in Cornwall this weekend!",
         "hashtag": "#Sealife",
         "comments": "view all comments"
@@ -23,7 +23,7 @@ const jsonData = [
         "location": "Spain,",
         "timeId": 5,
         "feedPhoto": "CSS/img/feed8.jpg",
-        "likes": "13",
+        "likes": 13,
         "caption": "Gym sesh, got a cool photo in!",
         "hashtag": "#Gymlife",
         "comments": "view all comments"
@@ -35,7 +35,7 @@ const jsonData = [
         "location": "Bristol,",
         "timeId": 11,
         "feedPhoto": "CSS/img/feed4.jpg",
-        "likes": "100",
+        "likes": 11,
         "caption": "got my varial kickflips down xD",
         "hashtag": "#Skate",
         "comments": "view all comments"
@@ -47,7 +47,7 @@ const jsonData = [
         "location": "America,",
         "timeId": 2,
         "feedPhoto": "CSS/img/feed3.png",
-        "likes": "20",
+        "likes": 20,
         "caption": "Hard at work!",
         "hashtag": "#StudyMedicine",
         "comments": "view all comments"
@@ -59,7 +59,7 @@ const jsonData = [
         "location": "Wales,",
         "timeId": 1,
         "feedPhoto": "CSS/img/s1.jpg",
-        "likes": "130",
+        "likes": 32,
         "caption": "One for the portfolio",
         "hashtag": "#PortraitPhotography",
         "comments": "view all comments"
@@ -71,7 +71,7 @@ const jsonData = [
         "location": "America,",
         "timeId": 4,
         "feedPhoto": "CSS/img/feed2.jpg",
-        "likes": "38",
+        "likes": 38,
         "caption": "Beautiful!",
         "hashtag": "#Animals",
         "comments": "view all comments"
@@ -103,9 +103,12 @@ function feedInfo(infoPst) {
                         <div class="caption">
                             <p><b>${infoPst.caption}<span class="hash-tag">${infoPst.hashtag}</span></p>
                         </div>
-                                <button id="like-button"><span>Like
-</span></button>
-                                <span id="like-count"><i>likes</i>&nbsp${infoPst.likes}</span>
+                        <div class="like-fnc">
+                                <button class="like-btn" data-id="1">
+                                <img src="CSS/img/hearte.jpg">likes
+                                <span class="like-count">${infoPst.likes}</span>
+                            </button> 
+                        </div>
                         <div class="text-gry comment">${infoPst.comments}
 
                         </div>
@@ -122,16 +125,23 @@ document.getElementById("feed").innerHTML = `
 ${sortedJsonData.map(feedInfo).join('')}
 `
 
-const likeCountElement = document.getElementById("like-count");
-const likeButtonElement = document.getElementById("like-button");
+//get ALL like buttons
+const likeButtons = document.querySelectorAll('.like-btn');
 
-//defining click even handler for the like button.
-function like() {
-    jsonData[0].likes++;
+//add an event listener to each like button.
+likeButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        //get ID of post from button's data-id attribute
+    const postId = button.dataset.id;
 
-    //update like count
-    likeCountElement.textContent = jsonData[0].likes;
-}
-likeButtonElement.addEventListener("click", like);
+    // Find the post in the jsonData array using the ID
+    const post = sortedJsonData.find((p) => p.timeId == postId);
 
+    // Update the likes property of the post object
+    post.likes++;
 
+    // Update the like count on the page
+    const likeCount = button.querySelector('.like-count');
+    likeCount.textContent = post.likes;
+    });
+});

@@ -495,15 +495,33 @@ main {
 .hash-tag {
     color: var(--color-primary);
 }
-
-.like-btn {
-    margin-left: 400px;
-    color: pink;
+.heart-img {
+   
+    width: 100%;
+    height: auto;
 }
-
+.like-fnc img {
+    height: 1.4rem;
+    width: 1.4rem;
+    border: 2px solid var(--bg);
+    border-radius: 50%;
+    display: block;
+    overflow: hidden;
+    margin-left: -.6rem;
+}
+.like-fnc button {
+    background-color: #555555;
+    border: thin;
+    border-radius: 30%;
+    color: white;
+    padding: 3px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 15px;
+    margin-left: 700px;
+    cursor: pointer;
+}
 /* ...................feed end............ */
-
-
 /* ..................maine right....................start......... */
 /* ...message... */
 .main-right {
