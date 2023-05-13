@@ -6,6 +6,7 @@ const jsonData = [
     {
 
         //User 1
+        postId: 1,
         "profPhoto": "CSS/img/f1.png",
         "user": "Jack Smith",
         "location": "Cornwall,",
@@ -18,6 +19,7 @@ const jsonData = [
     },
     {
         //User 2
+        postId: 2,
         "profPhoto": "CSS/img/p5.png",
         "user": "Nathan Amarly",
         "location": "Spain,",
@@ -30,6 +32,7 @@ const jsonData = [
     },
     {
         //User 3
+        postId: 3,
         "profPhoto": "CSS/img/feed4.jpg",
         "user": "Liam Joli",
         "location": "Bristol,",
@@ -42,6 +45,7 @@ const jsonData = [
     },
     {
         //User 4
+        postId: 4,
         "profPhoto": "CSS/img/p7.png",
         "user": "Lorel Cage",
         "location": "America,",
@@ -54,6 +58,7 @@ const jsonData = [
     },
     {
         //User 5
+        postId: 5,
         "profPhoto": "CSS/img/f3.png",
         "user": "Tyler Bane",
         "location": "Wales,",
@@ -66,6 +71,7 @@ const jsonData = [
     },
     {
         //User 6
+        postId: 6,
         "profPhoto": "CSS/img/feed2.jpg",
         "user": "Ashley Hargrave",
         "location": "America,",
@@ -104,7 +110,7 @@ function feedInfo(infoPst) {
                             <p><b>${infoPst.caption}<span class="hash-tag">${infoPst.hashtag}</span></p>
                         </div>
                         <div class="like-fnc">
-                                <button class="like-btn" data-id="1">
+                                <button class="like-btn" data-post-id="${infoPst.postId}">
                                 <img src="CSS/img/hearte.jpg">likes
                                 <span class="like-count">${infoPst.likes}</span>
                             </button> 
@@ -125,23 +131,45 @@ document.getElementById("feed").innerHTML = `
 ${sortedJsonData.map(feedInfo).join('')}
 `
 
+
+//********LIKING FUNCTION START********
+
 //get ALL like buttons
+
 const likeButtons = document.querySelectorAll('.like-btn');
 
 //add an event listener to each like button.
 likeButtons.forEach((button) => {
     button.addEventListener('click', () => {
         //get ID of post from button's data-id attribute
-    const postId = button.dataset.id;
+    const postId = button.dataset.postId;
 
     // Find the post in the jsonData array using the ID
-    const post = sortedJsonData.find((p) => p.timeId == postId);
-
+    const post = sortedJsonData.find((p) => p.postId == postId);
     // Update the likes property of the post object
     post.likes++;
-
     // Update the like count on the page
     const likeCount = button.querySelector('.like-count');
     likeCount.textContent = post.likes;
     });
+
+
+
+
+    let count = localStorage.getItem('likeCount') || 0;
+
+    document.getElementById('.like-count').textContent = count;
+
+    document.getElementById('.like-btn').addEventListener('click', function () {
+        count++;
+        document.getElementById('.like-count').textContent = count;
+
+        localStorage.setItem('likeCount', count);
+    });
+    //store updated like count in local storage.
 });
+
+
+
+
+//********LIKING FUNCTION STOP********
