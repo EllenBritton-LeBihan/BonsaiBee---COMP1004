@@ -189,3 +189,39 @@ export const jsonData = [
 ];
 
 export { jsonData };
+
+
+
+
+//get ALL like buttons
+const likeButtons = document.querySelectorAll('.like-btn');
+
+//add an event listener to each like button.
+likeButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        //get ID of post from button's data-id attribute
+        const postId = button.dataset.postId;
+
+        // Find the post in the jsonData array using the ID
+        const post = sortedJsonData.find((p) => p.postId == postId);
+        // Update the likes property of the post object
+        post.likes++;
+
+
+        // Update the like count on the page
+        const likeCount = button.querySelector('.like-count');
+        likeCount.textContent = post.likes;
+
+        localStorage.setItem(postId, JSON.stringify(post));
+    });
+
+
+    //check if post is already liked and update like count on page.
+    const postId = button.dataset.postId;
+    const post = JSON.parse(localStorage.getItem(postId));
+    if (post) {
+        const likeCount = button.querySelector('.like-count');
+        likeCount.textContent = post.likes;
+    }
+    //stop user liking more than once for specific id.
+});

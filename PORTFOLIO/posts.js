@@ -104,7 +104,6 @@ function feedInfo(infoPst) {
                             <img class="feed-photo" src="${infoPst.feedPhoto}">
                         </div>
                         <div class="liked-by">
-                            <p>liked by <b>${infoPst.likes}</b></p>
                         </div>
                         <div class="caption">
                             <p><b>${infoPst.caption}<span class="hash-tag">${infoPst.hashtag}</span></p>
@@ -133,41 +132,44 @@ ${sortedJsonData.map(feedInfo).join('')}
 
 
 //********LIKING FUNCTION START********
-
-//get ALL like buttons
-
 const likeButtons = document.querySelectorAll('.like-btn');
 
-//add an event listener to each like button.
+// Get the IDs of the posts that the user has liked from local storage
+const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || [];
+
+// Add an event listener to each like button.
 likeButtons.forEach((button) => {
     button.addEventListener('click', () => {
-        //get ID of post from button's data-id attribute
-    const postId = button.dataset.postId;
+        // Get the ID of the post from the button's data-id attribute
+        const postId = button.dataset.postId;
 
-    // Find the post in the jsonData array using the ID
+        // Check if the post has already been liked by the user
+        if (likedPosts.includes(postId)) {
+            alert('You have already liked this post!');
+            return;
+        }
+
+        // Find the post in the jsonData array using the ID
+        const post = sortedJsonData.find((p) => p.postId == postId);
+        // Update the likes property of the post object
+        post.likes++;
+        // Update the like count on the page
+        const likeCount = button.querySelector('.like-count');
+        likeCount.textContent = post.likes;
+
+        // Add the ID of the post to the likedPosts array and store it in local storage
+        likedPosts.push(postId);
+        localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    });
+
+    // Set the initial like count for each post on the page
+    const postId = button.dataset.postId;
     const post = sortedJsonData.find((p) => p.postId == postId);
-    // Update the likes property of the post object
-    post.likes++;
-    // Update the like count on the page
     const likeCount = button.querySelector('.like-count');
     likeCount.textContent = post.likes;
-    });
-
-
-
-
-    let count = localStorage.getItem('likeCount') || 0;
-
-    document.getElementById('.like-count').textContent = count;
-
-    document.getElementById('.like-btn').addEventListener('click', function () {
-        count++;
-        document.getElementById('.like-count').textContent = count;
-
-        localStorage.setItem('likeCount', count);
-    });
-    //store updated like count in local storage.
 });
+
+
 
 
 
