@@ -103,21 +103,36 @@ function feedInfo(infoPst) {
                         <div class="feed-phots">
                             <img class="feed-photo" src="${infoPst.feedPhoto}">
                         </div>
+
+
+                    <!--********* LIKE SECTION ********* -->
                         <div class="liked-by">
                         </div>
                         <div class="caption">
-                            <p><b>${infoPst.caption}<span class="hash-tag">${infoPst.hashtag}</span></p>
+                            <p><b>${infoPst.caption}<span class="hash-tag"><br>${infoPst.hashtag}</span></p>
                         </div>
                         <div class="like-fnc">
                                 <button class="like-btn" data-post-id="${infoPst.postId}">
-                                <img src="CSS/img/hearte.jpg">likes
+                                <img src="CSS/img/hearte.jpg">LIKE
                                 <span class="like-count">${infoPst.likes}</span>
                             </button> 
                         </div>
-                        <div class="text-gry comment">${infoPst.comments}
 
+
+                        <!--********* COMMENT SECTION ********* -->
+                    <div class="post" id="${infoPst.postId}">
+                        <div class="comment-fnc">
+                            <form class="comment-form">
+                                <label for="comment-${infoPst.postId}" Add a comment!: </label>
+                                <input type="text" id="comment-${infoPst.postId}" name="comment">
+                                <button type="submit">Submit</button>
+                            </form>
+                            <button class="comment-btn" data-post-id="${infoPst.postId}"></button>
+                            </div>
+                            <div class="comment-container"><br>Comments:<small>
+                                <!-- Comment elements will be appended here -->
+                            </div>
                         </div>
-                  
                     </div>
     `
 }
@@ -134,8 +149,10 @@ ${sortedJsonData.map(feedInfo).join('')}
 //********LIKING FUNCTION START********
 const likeButtons = document.querySelectorAll('.like-btn');
 
-// Get the IDs of the posts that the user has liked from local storage
-const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || [];
+// Get the IDs of the posts that the user has liked from the cookie
+const likedPostIds = document.cookie.split('; ').find(row => row.startsWith('likedPosts='));
+const likedPosts = likedPostIds ? likedPostIds.split('=')[1].split(',') : [];
+
 
 // Add an event listener to each like button.
 likeButtons.forEach((button) => {
@@ -145,7 +162,7 @@ likeButtons.forEach((button) => {
 
         // Check if the post has already been liked by the user
         if (likedPosts.includes(postId)) {
-            alert('You have already liked this post!');
+            alert('You have already liked this post!')   
             return;
         }
 
@@ -153,25 +170,43 @@ likeButtons.forEach((button) => {
         const post = sortedJsonData.find((p) => p.postId == postId);
         // Update the likes property of the post object
         post.likes++;
+
+        // Add the ID of the post to the likedPosts array and store it in a cookie
+        likedPosts.push(postId);
+        document.cookie = `likedPosts=${likedPosts.join(',')}`;
+
         // Update the like count on the page
         const likeCount = button.querySelector('.like-count');
         likeCount.textContent = post.likes;
-
-        // Add the ID of the post to the likedPosts array and store it in local storage
-        likedPosts.push(postId);
-        localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
     });
-
-    // Set the initial like count for each post on the page
-    const postId = button.dataset.postId;
-    const post = sortedJsonData.find((p) => p.postId == postId);
-    const likeCount = button.querySelector('.like-count');
-    likeCount.textContent = post.likes;
 });
-
-
-
-
-
-
 //********LIKING FUNCTION STOP********
+
+
+
+//********COMMENT FUNCTION START********
+const postForms = document.querySelectorAll('.comment-form');
+const postContainers = document.querySelectorAll('.comment-container');
+
+postForms.forEach((form, index) => {
+    form.addEventListener('submit', (event) => {
+        event.preventDefault(); // Prevent default form submission behavior
+
+        const commentInput = form.querySelector('input[type="text"]');
+        const commentText = commentInput.value.trim();
+
+        if (commentText === '') {
+            return;
+        }
+
+        // Create a new comment element and append it to the comment container for this post
+        const newComment = document.createElement('div');
+        newComment.classList.add('comment');
+        newComment.textContent = commentText;
+        postContainers[index].appendChild(newComment);
+
+        // Clear the comment input field
+        commentInput.value = '';
+    });
+});
+//********COMMENT FUNCTION STOP********
