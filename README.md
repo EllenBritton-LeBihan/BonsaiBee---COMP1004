@@ -1,8 +1,9 @@
 # BonsaiBee---COMP1004
-# 2022-COMP1000-CW
+# 2022/2023-COMP1004-CW
 
 # BonsaiBee 
-![]img
+![](https://github.com/Neo-3l/BonsaiBee---COMP1004/assets/114653081/0724558f-32e9-4fe1-b377-3ea59924f3bf)
+
 
 A simple demo of a social media feed algorithm hosted on a single page application (SPA). 
 ![]img
