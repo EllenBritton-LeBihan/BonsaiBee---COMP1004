@@ -5,11 +5,6 @@
 
 A simple demo of a social media feed algorithm hosted on a single page application (SPA). 
 
-![](https://github.com/Neo-3l/BonsaiBee---COMP1004/assets/114653081/95355a01-31ff-4eb2-963b-cc39d20a85c5)
-![](https://github.com/Neo-3l/BonsaiBee---COMP1004/assets/114653081/d211bb93-6e4f-40b2-89e1-75ea9f9561b8)
-![](https://github.com/Neo-3l/BonsaiBee---COMP1004/assets/114653081/09a82c25-d02a-4899-9395-36a4fe92fdaf)
-
-
 
 ## USAGE
 	1. Open BonsaiBee, scroll through and interact with application
