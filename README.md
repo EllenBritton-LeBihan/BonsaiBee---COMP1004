@@ -1,11 +1,11 @@
-# BonsaiBee---COMP1004 2022/2023 ![](https://github.com/Neo-3l/BonsaiBee---COMP1004/assets/114653081/c3491c4c-bd98-4a15-9a6c-97252fd19bb4)
+# BonsaiBee---COMP1004 2022/2023 
 
 ![](https://github.com/Neo-3l/BonsaiBee---COMP1004/issues/1#issuecomment-1547907600)
 ![](https://github.com/Neo-3l/BonsaiBee---COMP1004/issues/1#issuecomment-1547907936)
 ![](https://github.com/Neo-3l/BonsaiBee---COMP1004/issues/1#issuecomment-1547908085)
 
 # BonsaiBee 
-![](https://github.com/Neo-3l/BonsaiBee---COMP1004/assets/114653081/0724558f-32e9-4fe1-b377-3ea59924f3bf)
+![](https://github.com/Neo-3l/BonsaiBee---COMP1004/assets/114653081/c3491c4c-bd98-4a15-9a6c-97252fd19bb4)
 
 
 A simple demo of a social media feed algorithm hosted on a single page application (SPA). 
