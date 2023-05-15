@@ -13,7 +13,7 @@ A simple demo of a social media feed algorithm hosted on a single page applicati
 	
 	
 	
-####Home page
+##Home page
 ![](https://github.com/Neo-3l/BonsaiBee---COMP1004/assets/114653081/95355a01-31ff-4eb2-963b-cc39d20a85c5)
   
 BonsaiBee demo of user interaction .
