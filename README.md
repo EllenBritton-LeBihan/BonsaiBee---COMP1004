@@ -1,4 +1,5 @@
 # BonsaiBee---COMP1004 2022/2023 
+![](https://github.com/Neo-3l/BonsaiBee---COMP1004/assets/114653081/c3491c4c-bd98-4a15-9a6c-97252fd19bb4)
 
 
 
