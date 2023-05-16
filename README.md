@@ -27,11 +27,3 @@ Demonstrate the operation of an algorithm that considers engagement and recency 
 As a user I would like to be able to scroll through posts, see basic post information, like and comment on them and see my posts ordered in terms of relevancy and recency.
 
 
-## RESOURCES
-
--  // for JavaScript
-- 
-
-## Final Report - Comp1004
-
-Documentation: <document>
