@@ -1,10 +1,7 @@
-//,,,,,,,,,,,START DISPLAY ,,,,,,,,,,,//
+//********** START DISPLAY ********** 
 
 
-
-
-
-//,,,,,,,,,,,TOGGLE SWITCH start,,,,,,,,,,,//
+//************TOGGLE SWITCH START ************
 $(document).ready(function () {
     $("#toggle-button1").addClass("active");
     $(".quad-state-toggle-button").click(function () {
@@ -31,21 +28,18 @@ function lightMode() {
     element.className = "light-mode";
     content.innerText = "Light Mode is OFF";
 }
-//,,,,,,,,,,, TOGGLE SIWTCH THEME end,,,,,,,,,,,//
+//************ TOGGLE SIWTCH END ************//
 
 
-//,,,,,,,,,, SideBar start ,,,,,,,, //
+//************ SIDE-BAR START ************//
 const menuItem = document.querySelectorAll('.menu-item');
 
-
-// remove active classlist.....
 const removeActive = () => {
     menuItem.forEach(item => {
         item.classList.remove('active')
     });
 }
 
-// add active classlist.....
 menuItem.forEach(item => {
     item.addEventListener('click', () => {
         removeActive();
@@ -61,35 +55,15 @@ menuItem.forEach(item => {
 })
 
 
-//....................MESSAGE................
-//....................MESSAGE................
-const message = document.querySelector('#message');
-const messageBox = document.querySelector('#message-box');
-
-message.addEventListener('click', () => {
-
-    messageBox.classList.add('box-sh');
-    message.querySelector('.count').style.display = 'none'
-
-
-    setTimeout(() => {
-        messageBox.classList.remove('box-sh');
-    }, 2000);
-
-})
-
-// ...................THEME CUSTOMIZTION......
-// ............THEME CUSTOMIZTION......
-
+// ********** CUSTOMIZE THEME **********
 const themeMenu = document.querySelector('#themeMenu');
 const themBOx = document.querySelector('.theme')
-
 
 themeMenu.addEventListener('click', () => {
     themBOx.style.display = 'grid'
 })
 
-// FIREND RQUEST BUTTON..............
+//********** FRIEND REQUEST BUTTON **********
 const addBtn = document.querySelectorAll('#add');
 const delbtn = document.querySelectorAll('#del');
 
@@ -106,12 +80,10 @@ delbtn.forEach(element => {
     })
 });
 
-
-// WINDOW EVENT.....
+// EVENT --- WINDOW 
 window.addEventListener('scroll', () => {
     themBOx.style.display = 'none'
     document.querySelector('.notification').style.display = 'none'
 })
-
-//,,,,,,,,,,,END DISPLAY ,,,,,,,,,,,//
+//********** END DISPLAY ********** //
 

@@ -15,12 +15,13 @@ const jsonData = [
         "likes": 78,
         "caption": "Monster waves in Cornwall this weekend!",
         "hashtag": "#Sealife",
-        "comments": "view all comments"
+        "commentCount": 0,
+        "relevance": 0
     },
     {
         //User 2
         postId: 2,
-        "profPhoto": "CSS/img/p5.png",
+        "profPhoto": "CSS/img/f2.png",
         "user": "Nathan Amarly",
         "location": "Spain,",
         "timeId": 5,
@@ -28,7 +29,8 @@ const jsonData = [
         "likes": 13,
         "caption": "Gym sesh, got a cool photo in!",
         "hashtag": "#Gymlife",
-        "comments": "view all comments"
+        "commentCount": 0,
+        "relevance": 0
     },
     {
         //User 3
@@ -41,33 +43,36 @@ const jsonData = [
         "likes": 11,
         "caption": "got my varial kickflips down xD",
         "hashtag": "#Skate",
-        "comments": "view all comments"
+        "commentCount": 0,
+        "relevance": 0
     },
     {
         //User 4
         postId: 4,
-        "profPhoto": "CSS/img/p7.png",
+        "profPhoto": "CSS/img/f5.png",
         "user": "Lorel Cage",
         "location": "America,",
         "timeId": 2,
-        "feedPhoto": "CSS/img/feed3.png",
+        "feedPhoto": "CSS/img/st3.jpg",
         "likes": 20,
         "caption": "Hard at work!",
-        "hashtag": "#StudyMedicine",
-        "comments": "view all comments"
+        "hashtag": "#StudyPhysics",
+        "commentCount": 0,
+        "relevance": 0
     },
     {
         //User 5
         postId: 5,
         "profPhoto": "CSS/img/f3.png",
         "user": "Tyler Bane",
-        "location": "Wales,",
+        "location": "Costa Rica,",
         "timeId": 1,
         "feedPhoto": "CSS/img/s1.jpg",
         "likes": 32,
         "caption": "One for the portfolio",
         "hashtag": "#PortraitPhotography",
-        "comments": "view all comments"
+        "commentCount": 0,
+        "relevance": 0
     },
     {
         //User 6
@@ -80,7 +85,22 @@ const jsonData = [
         "likes": 38,
         "caption": "Beautiful!",
         "hashtag": "#Animals",
-        "comments": "view all comments"
+        "commentCount": 0,
+        "relevance": 0
+    },
+    {
+        //User 6
+        postId: 7,
+        "profPhoto": "CSS/img/f4.png",
+        "user": "Janson Mutley",
+        "location": "Plymouth,",
+        "timeId": 7,
+        "feedPhoto": "CSS/img/feed5.jpeg",
+        "likes": 238,
+        "caption": "No better place!",
+        "hashtag": "#Lighthouse",
+        "commentCount": 0,
+        "relevance": 0
     }
 ];
 
@@ -134,15 +154,19 @@ function feedInfo(infoPst) {
                             </div>
                         </div>
                     </div>
+
+  
     `
 }
-
+//sort in terms of recency
 const sortedJsonData = jsonData.sort((a, b) => a.timeId - b.timeId);
-
 
 document.getElementById("feed").innerHTML = `
 <h1> feed </h1>
 ${sortedJsonData.map(feedInfo).join('')}
+<footer>
+                <h6> Please be advised that the Single Paged Web application is provided for demonstration purposes only and does not store any user data in a server database. The application merely showcases hows a social media feed algorithm could function, and is not intended to be used as a production system. By using this application, you agree that it is provided 'as is' and without any warranties, express or implied, including but not limited to the implied warranties of merchantability and fitness for a particular purpose. You further agree that the application's creators shall not be liable for any direct, incidental, special or consequential damages arising from or in connection with the use or inability to use this application.</h6>
+            </footer>
 `
 
 
@@ -153,6 +177,8 @@ const likeButtons = document.querySelectorAll('.like-btn');
 const likedPostIds = document.cookie.split('; ').find(row => row.startsWith('likedPosts='));
 const likedPosts = likedPostIds ? likedPostIds.split('=')[1].split(',') : [];
 
+//for calculating relevance later on.
+const likeCountArray = []; 
 
 // Add an event listener to each like button.
 likeButtons.forEach((button) => {
@@ -171,6 +197,15 @@ likeButtons.forEach((button) => {
         // Update the likes property of the post object
         post.likes++;
 
+        //create new like object wiht postId and like Count properties.
+        const newLike = {
+            postId: postId,
+            likeCount: post.likes
+        };
+
+        //push new like count to likeCountArray.
+        likeCountArray.push(newLike);
+
         // Add the ID of the post to the likedPosts array and store it in a cookie
         likedPosts.push(postId);
         document.cookie = `likedPosts=${likedPosts.join(',')}`;
@@ -178,8 +213,11 @@ likeButtons.forEach((button) => {
         // Update the like count on the page
         const likeCount = button.querySelector('.like-count');
         likeCount.textContent = post.likes;
+
+        alert(JSON.stringify(likeCountArray, null, 2));
     });
 });
+
 //********LIKING FUNCTION STOP********
 
 
@@ -188,7 +226,13 @@ likeButtons.forEach((button) => {
 const postForms = document.querySelectorAll('.comment-form');
 const postContainers = document.querySelectorAll('.comment-container');
 
+//each time a use comments on a post the commentCountArray ++
+const commentCountArray = [];
+
+
 postForms.forEach((form, index) => {
+    commentCountArray[index] = 0; //initialize count for th post to 0.
+
     form.addEventListener('submit', (event) => {
         event.preventDefault(); // Prevent default form submission behavior
 
@@ -205,8 +249,52 @@ postForms.forEach((form, index) => {
         newComment.textContent = commentText;
         postContainers[index].appendChild(newComment);
 
+        //increment commentCount for this post and add it to the commentCount Array
+        commentCountArray[index]++;
+        const post = sortedJsonData[index];
+        post.commentCount = commentCountArray[index];
+
         // Clear the comment input field
         commentInput.value = '';
+
+        alert(commentCountArray);
     });
 });
 //********COMMENT FUNCTION STOP********
+
+
+
+
+//********RELEVANCE ALGORITHM START********
+
+//calculate relevance of each post.
+function sortByRelevance(posts, likedPosts) {
+    // Loop through the posts and calculate the relevance for each post
+    for (let i = 0; i < posts.length; i++) {
+        const post = posts[i];
+        let relevance = post.likes;
+
+        // Check if the user has liked this post
+        if (likedPosts.includes(post.postId)) {
+            relevance += 10; // Increase the relevance by 10 if the user has liked the post
+        }
+
+        // Loop through the comments for this post and add 1 to the relevance for each comment
+        for (let j = 0; j < post.comments.length; j++) {
+            const comment = post.comments[j];
+            relevance += 1;
+        }
+
+        // Add the relevance as a new property to the post object
+        post.relevance = relevance;
+    }
+
+    // Sort the posts based on the relevance, in descending order
+    posts.sort((a, b) => b.relevance - a.relevance);
+
+    return posts;
+
+ 
+}
+
+//********RELEVANCE STOP********

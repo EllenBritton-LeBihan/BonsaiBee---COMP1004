@@ -10,13 +10,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
     <title>BonsaiBee</title>
-    <!-- ,,,,,,,,,,,, CSS LINK ,,,,,,,,,,,-->
     <link rel="stylesheet" href="CSS/main.css" />
-    <link rel="text/javascript" href="script.js" />
 </head>
 
 <body>
-    <!-- ,,,,,,,,, NAV BAR start,,,,,,,,, -->
+    <!-- ********* NAV BAR START ********* -->
     <nav>
         <div class="container nav-container">
             <div class="bonsBee-logo">
@@ -30,8 +28,10 @@
                 <img src="CSS/icon/search.svg" class="icon2">
                 <input type="search" placeholder="search for user...">
             </div>
+            <div id="searchResults"></div>
+
             <div class="login">
-                <label for="creatPost" class="btn btn-primary">LOGIN</label>
+                <label for="creatPost" class="btn btn-primary">SEARCH</label>
                 <div class="profile-phots">
                     <img src="CSS/img/User2.png" alt="">
                 </div>
@@ -39,30 +39,26 @@
 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+            <!-- ********* THEME toggle START ********* -->
             <div class="quad-state-toggle">
-
                 <button onclick="DarkMode()" class="quad-state-toggle-button" id="toggle-button1">
                     Dark
                 </button>
-
                 <button onclick="tangyMode()" class="quad-state-toggle-button" id="toggle-button2">
                     Tangy
                 </button>
-
                 <button onclick="lightMode()" class="quad-state-toggle-button" id="toggle-button3">
                     Light
                 </button>
             </div>
         </div>
-        <!-- ,,,,,,,,, Dark/Light toggle start,,,,,,,,, -->
-
     </nav>
-    <!-- ,,,,,,,,, NAV BAR end,,,,,,,,, -->
-
-    <!-- ................START MAIN SECTION......................... -->
+    <!-- ********* THEME toggle STOP ********* -->
+    <!-- ********* NAV BAR END ********* -->
+    <!-- ********* START MAIN SECTION ********* -->
     <main>
         <div class="container main-container">
-            <!--=======MAIN LEFT======== -->
+            <!--********* MAIN LEFT ********* -->
             <div class="main-left">
                 <div class="profile">
                     <div class="profile-phots">
@@ -74,36 +70,33 @@
                     </div>
                 </div>
 
-                <!--.............. SIDEBAR.............. -->
+                <!--********* SIDEBAR ********* -->
                 <div class="side-bar">
-
                     <a class="menu-item active">
-                       <h3>HOME</h3>
+                        <h3>HOME</h3>
                     </a>
                     <a class="menu-item ">
                         <h3>GAMES</h3>
                     </a>
                     <a class="menu-item" id="notifice">
                         <span> <small class="count">0</small></span><h3>NOTIFICATIONS</h3>
-                        <!-- ....................NOTIFICATION............................ -->
-                       
                     </a>
                     <a class="menu-item" id="MESSAGE">
                         <h3>MESSAGE</h3>
                     </a>
                     <a class="menu-item ">
-                       <h3>SAVED</h3>
+                        <h3>SAVED</h3>
                     </a>
                     <a class="menu-item g">
                         <h3>SETTINGS</h3>
                     </a>
-
                     <label for="creatPost" class="btn btn-primary">login post</label>
-
                 </div>
-
             </div>
-            <!-- =======MAIN MID======= -->
+
+
+
+            <!-- ********** MAIN MID **********-->
             <div class="main-mid">
                 <form class="creatPost">
                     <div class="profile-phots">
@@ -117,28 +110,28 @@
                     </div>
                 </form>
 
-                <!--.................. START feed .......................-->
+                <!--********** START FEED **********-->
                 <section id="feed"></section>
-                <!--.................. END feed .........................-->
+                <!--********** END FEED **********-->
             </div>
-            <!-- ...... MAIN right ...... -->
+            <!-- ********** MAIN right **********-->
             <div class="main-right">
                 <div class="MESSAGEs" id="MESSAGE-box">
                     <div class="MESSAGE-heading">
                         <h4>MESSAGE</h4><span><img src="CSS/icon/pencil-square.svg" class="icon1"></span>
                     </div>
 
-                    <!-- ...... START friend request ......-->
+
+                    <!-- ********** START friend request **********-->
                     <section id="friends"></section>
+                    <!-- ********** STOP friend request **********-->
                 </div>
             </div>
+
     </main>
-    <!-- ................END MAIN SECTION......................... -->
-    <script src="animation.js"></script>
+    <!-- ********** END MAIN SECTION ********** -->
+    <script src="display.js"></script>
     <script src="friends.js"></script>
     <script src="posts.js"></script>
-    <footer>
-        <h6> Please be advised that the Single Paged Web application is provided for demonstration purposes only and does not store any user data in a server database. The application merely showcases hows a social media feed algorithm could function, and is not intended to be used as a production system. By using this application, you agree that it is provided 'as is' and without any warranties, express or implied, including but not limited to the implied warranties of merchantability and fitness for a particular purpose. You further agree that the application's creators shall not be liable for any direct, incidental, special or consequential damages arising from or in connection with the use or inability to use this application.</h6>
-    </footer>
 </body>
 </html>
